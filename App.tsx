@@ -6,9 +6,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SearchScreen} from './src/screens/SearchScreen';
 import {ROUTES} from './src/constants/routes';
+import Geolocation from '@react-native-community/geolocation';
 
 const Stack = createNativeStackNavigator();
 
+Geolocation.setRNConfiguration({
+  authorizationLevel: 'whenInUse',
+  skipPermissionRequests: false,
+});
+//Geolocation.getCurrentPosition(info => console.log('🚀 ', info));
 function App() {
   return (
     <Provider store={store}>

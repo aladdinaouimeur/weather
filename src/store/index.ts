@@ -2,7 +2,7 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {weatherApi} from '../services/weatherApi';
 import {setupListeners} from '@reduxjs/toolkit/query';
 
-import storage from 'redux-persist/lib/storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   FLUSH,
   PAUSE,
@@ -13,14 +13,17 @@ import {
   persistReducer,
   persistStore,
 } from 'redux-persist';
+import weatherSlice from './weatherSlice';
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: AsyncStorage,
+  whitelist: ['weatherApi', 'weather'],
 };
 
 const allReducers = {
   [weatherApi.reducerPath]: weatherApi.reducer,
+  weather: weatherSlice,
 };
 
 export const rootReducer = combineReducers(allReducers);

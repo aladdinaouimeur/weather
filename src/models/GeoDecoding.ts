@@ -6,3 +6,8 @@ export type GeoDecoding = {
   country: string;
   state: string;
 };
+
+export type GeoCoordinates = {
+  lat: number;
+  lon: number;
+};

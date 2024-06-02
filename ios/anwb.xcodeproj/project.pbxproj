@@ -15,9 +15,6 @@
 		59C27314E668BFFA8378EEEF /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 6B6AA794E78FCBDEFE0661EA /* PrivacyInfo.xcprivacy */; };
 		7699B88040F8A987B510C191 /* libPods-anwb-anwbTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-anwb-anwbTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A40E2C3D2C0B44B30073D49A /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A40E2C3C2C0B44B30073D49A /* AntDesign.ttf */; };
-		A40E2C3F2C0B44C60073D49A /* FontAwesome6_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A40E2C3E2C0B44C60073D49A /* FontAwesome6_Regular.ttf */; };
-		A40E2C412C0B44D20073D49A /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A40E2C402C0B44D20073D49A /* MaterialCommunityIcons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,10 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				A40E2C3F2C0B44C60073D49A /* FontAwesome6_Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				A40E2C3D2C0B44B30073D49A /* AntDesign.ttf in Resources */,
-				A40E2C412C0B44D20073D49A /* MaterialCommunityIcons.ttf in Resources */,
 				59C27314E668BFFA8378EEEF /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,9 +362,6 @@
 			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-anwb/Pods-anwb-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-				"$(SRCROOT)/newInputFile",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
@@ -605,7 +596,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -677,7 +671,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

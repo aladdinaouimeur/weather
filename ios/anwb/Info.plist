@@ -2,16 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>The app needs access to the geolocation service of the device to show you the weather for your current location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>The app needs access to the geolocation service of the device to show you the weather for your current location</string>
 	<key>UIAppFonts</key>
 	<array>
-	 <string>AntDesign.ttf</string>
-
-  <string>FontAwesome6_Regular.ttf</string>
-  <string>MaterialCommunityIcons.ttf</string>
-  <string>SimpleLineIcons.ttf</string>
- 		<string>Octicons.ttf</string>
- 		<string>Zocial.ttf</string>
-  		<string>Fontisto.ttf</string>
+		<string>AntDesign.ttf</string>
+		<string>FontAwesome6_Regular.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
