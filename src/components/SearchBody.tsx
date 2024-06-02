@@ -1,6 +1,6 @@
 import styled from '@emotion/native';
 import React, {useMemo} from 'react';
-import {CurrentLocationRow} from './CurrentLocationRow';
+import {CurrentLocationHeader} from './CurrentLocationHeader';
 import {LocationSearchRow} from './LocationSearchRow';
 import {GeoDecoding} from '../models/GeoDecoding';
 import {
@@ -12,13 +12,22 @@ import {
 import {AppColors} from '../constants/colors';
 
 type SectionType = {title: string; data: GeoDecoding[]};
+
 type Props = {
   locationSections: SectionType[];
   isLoading: boolean;
   isError: boolean;
+  currentLocation?: GeoDecoding;
+  isGettingCurrentLocation: boolean;
 };
 
-export const SearchBody = ({isError, isLoading, locationSections}: Props) => {
+export const SearchBody = ({
+  isError,
+  isLoading,
+  locationSections,
+  currentLocation,
+  isGettingCurrentLocation,
+}: Props) => {
   const renderTitle = (item: {
     section: SectionListData<GeoDecoding, SectionType>;
   }) => {
@@ -53,7 +62,12 @@ export const SearchBody = ({isError, isLoading, locationSections}: Props) => {
 
   return (
     <Column>
-      <CurrentLocationRow />
+      <CurrentLocationHeader
+        isGettingCurrentLocation={isGettingCurrentLocation}
+      />
+      {currentLocation && (
+        <LocationSearchRow key={currentLocation.name} data={currentLocation} />
+      )}
       {renderBody}
     </Column>
   );

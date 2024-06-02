@@ -3,7 +3,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {API_KEY} from '../constants/apiKey';
 import {GeoDecoding} from '../models/GeoDecoding';
 
-type GetWeatherByCoordinatesRequest = {
+type CoordinatesRequest = {
   lat: number;
   lon: number;
 };
@@ -12,21 +12,30 @@ type GetWeatherByCoordinatesRequest = {
 export const weatherApi = createApi({
   reducerPath: 'weatherApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://api.openweathermap.org/`,
+    baseUrl: 'https://api.openweathermap.org/',
   }),
   endpoints: builder => ({
-    getWeatherByCoordinates: builder.query<any, GetWeatherByCoordinatesRequest>(
-      {
-        query: name => `weather?appid=${API_KEY}/${name}`,
-      },
-    ),
+    getWeatherByCoordinates: builder.query<any, CoordinatesRequest>({
+      query: name => `weather?appid=${API_KEY}/${name}`,
+    }),
     getGeoLocationOfPlace: builder.query<GeoDecoding[], string>({
-      query: query => `geo/1.0/direct?q=${query}&appid=${API_KEY}`,
+      query: query => `geo/1.0/direct?q=${query}&appid=${API_KEY}&limit=5`,
+    }),
+    getPlaceFromGeoLocation: builder.query<GeoDecoding, CoordinatesRequest>({
+      query: query =>
+        `geo/1.0/reverse?lat=${query.lat}&lon=${query.lon}&appid=${API_KEY}&limit=1`,
+      transformResponse: (response: GeoDecoding[]) => {
+        console.log('🚀 ~ response:', response);
+        return response[0];
+      },
     }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const {useGetWeatherByCoordinatesQuery, useGetGeoLocationOfPlaceQuery} =
-  weatherApi;
+export const {
+  useGetWeatherByCoordinatesQuery,
+  useGetGeoLocationOfPlaceQuery,
+  useGetPlaceFromGeoLocationQuery,
+} = weatherApi;

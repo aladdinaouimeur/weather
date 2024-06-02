@@ -14,7 +14,7 @@ Geolocation.setRNConfiguration({
   authorizationLevel: 'whenInUse',
   skipPermissionRequests: false,
 });
-//Geolocation.getCurrentPosition(info => console.log('🚀 ', info));
+
 function App() {
   return (
     <Provider store={store}>

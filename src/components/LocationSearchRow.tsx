@@ -4,19 +4,26 @@ import {AppColors} from '../constants/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {GeoDecoding} from '../models/GeoDecoding';
 import {LocationSaveButton} from './LocationSaveButton';
+import {useSearch} from '../hooks/useSearch';
 
 type Props = {
   data: GeoDecoding;
 };
 
 export const LocationSearchRow = ({data}: Props) => {
+  const {selectLocation} = useSearch();
+
+  const handleOnPress = () => {
+    selectLocation(data);
+  };
+
   return (
-    <Row>
+    <Row onPress={handleOnPress}>
       <IconContainer>
         <Icon name="city" size={20} color={AppColors.white} />
       </IconContainer>
       <Column>
-        <Title>{data?.local_names?.nl ?? data.name}</Title>
+        <Title>{`${data?.local_names?.nl ?? data.name}, ${data.state}`}</Title>
       </Column>
       <LocationSaveButton location={data} />
     </Row>
