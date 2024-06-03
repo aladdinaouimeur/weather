@@ -2,6 +2,7 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {API_KEY} from '../constants/apiKey';
 import {GeoDecoding} from '../models/GeoDecoding';
+import {WeatherData} from '../models/WeatherData';
 
 type CoordinatesRequest = {
   lat: number;
@@ -15,8 +16,9 @@ export const weatherApi = createApi({
     baseUrl: 'https://api.openweathermap.org/',
   }),
   endpoints: builder => ({
-    getWeatherByCoordinates: builder.query<any, CoordinatesRequest>({
-      query: name => `weather?appid=${API_KEY}/${name}`,
+    getWeatherByCoordinates: builder.query<WeatherData, CoordinatesRequest>({
+      query: query =>
+        `data/2.5/weather?lat=${query.lat}&lon=${query.lon}&appid=${API_KEY}&units=metric`,
     }),
     getGeoLocationOfPlace: builder.query<GeoDecoding[], string>({
       query: query => `geo/1.0/direct?q=${query}&appid=${API_KEY}&limit=5`,

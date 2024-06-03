@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {GeoDecoding} from '../models/GeoDecoding';
 import {LocationSaveButton} from './LocationSaveButton';
 import {useSearch} from '../hooks/useSearch';
+import {getLocationName} from '../utils/locationsUtils';
 
 type Props = {
   data: GeoDecoding;
@@ -23,7 +24,7 @@ export const LocationSearchRow = ({data}: Props) => {
         <Icon name="city" size={20} color={AppColors.white} />
       </IconContainer>
       <Column>
-        <Title>{`${data?.local_names?.nl ?? data.name}, ${data.state}`}</Title>
+        <Title>{getLocationName(data)}</Title>
       </Column>
       <LocationSaveButton location={data} />
     </Row>

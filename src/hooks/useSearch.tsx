@@ -1,5 +1,5 @@
 import {useMemo, useState, useEffect} from 'react';
-
+import {useNavigation} from '@react-navigation/native';
 import {useDebounce} from 'use-debounce';
 import {
   useGetGeoLocationOfPlaceQuery,
@@ -11,10 +11,14 @@ import {getUniqueSavedLocations} from '../utils/locationsUtils';
 import Geolocation from '@react-native-community/geolocation';
 import {skipToken} from '@reduxjs/toolkit/query/react';
 import {GeoDecoding} from '../models/GeoDecoding';
+import {RootStackParamList} from '../constants/routes';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const DEBOUNCE_INTERVAL = 300;
-
+export const SEARCH_SECTION_KEY = 'SearchSection';
 export const useSearch = () => {
+  const {goBack} =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const dispatch = useAppDispatch();
   const [isGettingCoordinates, setIsGettingCoordinates] = useState(false);
   const [currentCoordinates, setCurrentCoordinates] = useState<{
@@ -33,6 +37,7 @@ export const useSearch = () => {
     data: apiSuggestions,
     isError,
     isLoading,
+    isSuccess,
   } = useGetGeoLocationOfPlaceQuery(queryText, {
     skip: queryText.length < 2,
   });
@@ -52,6 +57,7 @@ export const useSearch = () => {
     () => [
       {
         title: 'Search results: ',
+        key: SEARCH_SECTION_KEY,
         data: apiSuggestions ?? [],
       },
       {
@@ -64,6 +70,7 @@ export const useSearch = () => {
 
   const selectLocation = (location: GeoDecoding) => {
     dispatch(setSelectedLocation(location));
+    goBack();
   };
 
   return {
@@ -74,5 +81,6 @@ export const useSearch = () => {
     suggestionsList,
     setSearchText,
     selectLocation,
+    isSuccess,
   };
 };

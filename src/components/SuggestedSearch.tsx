@@ -2,19 +2,22 @@ import React from 'react';
 import styled from '@emotion/native';
 import {IconButton} from './IconButton';
 import {AppColors} from '../constants/colors';
+import {useNavigation} from '@react-navigation/native';
 
 type Props = {
   onTextChange: (text: string) => void;
 };
 
 export const SuggestedSearch = ({onTextChange}: Props) => {
+  const {goBack} = useNavigation();
+
   return (
     <InputRow>
       <StyledBackIcon
         iconColor={AppColors.white}
         iconSize={16}
         icon="left"
-        onPress={() => {}}
+        onPress={goBack}
       />
       <StyledInput
         placeholderTextColor={AppColors.white}

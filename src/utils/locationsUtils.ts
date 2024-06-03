@@ -9,3 +9,10 @@ export const getUniqueSavedLocations = (
     savedLocation => !apiNames.includes(savedLocation.name),
   );
 };
+
+export const getLocationName = (location: GeoDecoding) => {
+  if (location.state) {
+    return `${location.name}, ${location.state}`;
+  }
+  return location.name;
+};

@@ -10,6 +10,7 @@ import {
   Text,
 } from 'react-native';
 import {AppColors} from '../constants/colors';
+import {SEARCH_SECTION_KEY} from '../hooks/useSearch';
 
 type SectionType = {title: string; data: GeoDecoding[]};
 
@@ -17,21 +18,23 @@ type Props = {
   locationSections: SectionType[];
   isLoading: boolean;
   isError: boolean;
+  isSuccess: boolean;
   currentLocation?: GeoDecoding;
   isGettingCurrentLocation: boolean;
 };
+
+type SectionItemType = {section: SectionListData<GeoDecoding, SectionType>};
 
 export const SearchBody = ({
   isError,
   isLoading,
   locationSections,
   currentLocation,
+  isSuccess,
   isGettingCurrentLocation,
 }: Props) => {
-  const renderTitle = (item: {
-    section: SectionListData<GeoDecoding, SectionType>;
-  }) => {
-    return item.section.data?.length > 0 ? (
+  const renderTitle = (item: SectionItemType) => {
+    return item.section.key !== SEARCH_SECTION_KEY || isSuccess ? (
       <Title>{item.section.title}</Title>
     ) : (
       <></>
@@ -39,6 +42,16 @@ export const SearchBody = ({
   };
   const itemRenderer = (item: ListRenderItemInfo<GeoDecoding>) => {
     return <LocationSearchRow key={item.index} data={item.item} />;
+  };
+
+  const renderNoSearchResults = (item: SectionItemType) => {
+    return item.section.data.length === 0 && isSuccess ? (
+      <Title>
+        No search results, try with a different name or/and spelling
+      </Title>
+    ) : (
+      <></>
+    );
   };
 
   const renderBody = useMemo(() => {
@@ -53,9 +66,13 @@ export const SearchBody = ({
     }
     return (
       <SectionList
-        renderSectionHeader={item => renderTitle(item)}
+        bounces={false}
+        stickySectionHeadersEnabled={false}
+        renderSectionHeader={renderTitle}
         sections={locationSections ?? []}
+        renderSectionFooter={renderNoSearchResults}
         renderItem={itemRenderer}
+        keyExtractor={(item, index) => item.name + index}
       />
     );
   }, [isError, isLoading, locationSections]);

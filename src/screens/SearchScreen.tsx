@@ -12,11 +12,13 @@ export const SearchScreen = () => {
     isError,
     isLoading,
     suggestionsList,
+    isSuccess,
   } = useSearch();
   return (
     <PageContainer>
       <SuggestedSearch onTextChange={setSearchText} />
       <SearchBody
+        isSuccess={isSuccess}
         currentLocation={currentLocation}
         isGettingCurrentLocation={isGettingCurrentLocation}
         locationSections={suggestionsList}

@@ -10,6 +10,7 @@
 	<array>
 		<string>AntDesign.ttf</string>
 		<string>FontAwesome6_Regular.ttf</string>
+		<string>Ionicons.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
