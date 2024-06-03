@@ -27,7 +27,6 @@ export const weatherApi = createApi({
       query: query =>
         `geo/1.0/reverse?lat=${query.lat}&lon=${query.lon}&appid=${API_KEY}&limit=1`,
       transformResponse: (response: GeoDecoding[]) => {
-        console.log('🚀 ~ response:', response);
         return response[0];
       },
     }),

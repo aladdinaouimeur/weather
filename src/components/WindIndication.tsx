@@ -19,7 +19,6 @@ export const WindIndication = () => {
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [{rotate: `${windDeg.value}deg`}],
   }));
-  console.log('🚀 ~ useEffect ~ weatherData.wind.deg:', weatherData?.wind);
 
   useEffect(() => {
     if (weatherData?.wind.deg) {
